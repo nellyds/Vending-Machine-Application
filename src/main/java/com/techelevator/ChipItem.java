@@ -8,8 +8,9 @@ public class ChipItem extends Item {
 		// TODO Auto-generated method stub
 		super.setNoise("Crunch Crunch, Yum!");
 	}
-	public ChipItem(String name, BigDecimal price) {
+	public ChipItem(String name, BigDecimal price,String itemLocation) {
 		this.setName(name);
 		this.setPrice(price);
+		this.setItemlocation(itemLocation);
 	}
 }

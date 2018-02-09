@@ -9,9 +9,10 @@ public class BeverageItem extends Item {
 		// TODO Auto-generated method stub
 		super.setNoise("Glug Glug, Yum!");
 	}
-	public BeverageItem(String name, BigDecimal price) {
+	public BeverageItem(String name, BigDecimal price, String itemLocation) {
 		this.setName(name);
 		this.setPrice(price);
+		this.setItemlocation(itemLocation);
 	}
 
 }

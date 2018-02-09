@@ -24,6 +24,23 @@ public class Menu {
 		}
 		return choice;
 	}
+	
+	public String getProductSelected() {
+		for(;;){
+			out.println();
+			out.print("Please enter item location >>>");
+			out.flush();
+
+			String productSelected = in.nextLine();
+			try {
+				return productSelected;
+			} catch(NumberFormatException ex) {
+				out.println("Please enter a valid number.");
+				out.println();
+				out.flush();
+			}
+		}
+	}
 
 	public BigDecimal getAmountFromUserInput() {
 		for(;;){

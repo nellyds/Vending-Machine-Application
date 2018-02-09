@@ -8,9 +8,10 @@ public class GumItem extends Item {
 		// TODO Auto-generated method stub
 		super.setNoise("Chew Chew, Yum!");
 	}
-	public GumItem(String name, BigDecimal price) {
+	public GumItem(String name, BigDecimal price,String itemLocation) {
 		this.setName(name);
 		this.setPrice(price);
+		this.setItemlocation(itemLocation);
 	}
 
 }

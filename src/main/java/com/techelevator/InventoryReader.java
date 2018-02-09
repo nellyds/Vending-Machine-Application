@@ -20,7 +20,6 @@ public class InventoryReader {
 
 		while (inputFileReader.hasNextLine()) {
 			String line = inputFileReader.nextLine();
-			System.out.println(line);
 			String itemArray[] = line.split("\\|");
 			Stack<Item> stackOfItems = new Stack<>();
 
@@ -30,16 +29,16 @@ public class InventoryReader {
 				counter++;
 
 				if (itemArray[0].contains("A")) {
-					stackOfItems.push(new ChipItem(itemArray[1], new BigDecimal(itemArray[2])));
+					stackOfItems.push(new ChipItem(itemArray[1], new BigDecimal(itemArray[2]),itemArray[0]));
 				}
 				if (itemArray[0].contains("B")) {
-					stackOfItems.push(new CandyItem(itemArray[1], new BigDecimal(itemArray[2])));
+					stackOfItems.push(new CandyItem(itemArray[1], new BigDecimal(itemArray[2]),itemArray[0]));
 				}
 				if (itemArray[0].contains("C")) {
-					stackOfItems.push(new BeverageItem(itemArray[1], new BigDecimal(itemArray[2])));
+					stackOfItems.push(new BeverageItem(itemArray[1], new BigDecimal(itemArray[2]),itemArray[0]));
 				}
 				if (itemArray[0].contains("D")) {
-					stackOfItems.push(new GumItem(itemArray[1], new BigDecimal(itemArray[2])));
+					stackOfItems.push(new GumItem(itemArray[1], new BigDecimal(itemArray[2]),itemArray[0]));
 				}
 			} inventoryMap.put(itemArray[0], stackOfItems);
 			
@@ -50,10 +49,7 @@ public class InventoryReader {
 		
 	}
 	
-	public void displayItems() {
-		System.out.println(inventoryMap.toString());
-		
-	}
+	
 	
 
 	

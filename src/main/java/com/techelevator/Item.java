@@ -6,6 +6,8 @@ public abstract class Item {
 String name;
 BigDecimal price;
 String noise;
+String itemlocation;
+
 public String getName() {
 	return name;
 }
@@ -25,5 +27,12 @@ public String getNoise() {
 public void setNoise(String noise) {
 	this.noise = noise;
 }
+public String getItemlocation() {
+	return itemlocation;
+}
+public void setItemlocation(String itemlocation) {
+	this.itemlocation = itemlocation;
+}
+
 
 }
