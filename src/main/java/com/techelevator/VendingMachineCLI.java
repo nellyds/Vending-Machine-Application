@@ -1,8 +1,12 @@
 package com.techelevator;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.util.Scanner;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.techelevator.view.Menu;
 
@@ -24,8 +28,20 @@ public class VendingMachineCLI {
 		this.menu = menu;
 	}
 
+	
 	public void run() throws FileNotFoundException {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
+		String  fileName = new SimpleDateFormat("yyyyMMddHHmm'.txt'").format(new Date());
+		fileName += "  Log File";
+		  File logFile = new File (fileName);
+		PrintWriter logWriter = new PrintWriter(logFile);
+
+
+		
+		 
+		
+		
 		InventoryReader ir = new InventoryReader();
 		ir.generateVendingList();
 		VendingMachine VM5000 = new VendingMachine(ir.inventoryMap);
@@ -55,30 +71,49 @@ public class VendingMachineCLI {
 				if (choice.equals(PURCHASE_DISPLAY_FEED)) {
 
 					System.out.println("\nPlease deposit money");
-				VM5000.addToBalance(menu.getAmountFromUserInput());
-				System.out.println("Machine Balance " + VM5000.getBalance());
+					
+					BigDecimal previousBalance = VM5000.balance;
+					VM5000.addToBalance(menu.getAmountFromUserInput());
+					System.out.println("Machine Balance " + VM5000.getBalance());
+					String feedWrite = ( timestamp.toGMTString() + " FEED MONEY:  " +"$"+previousBalance.toString() + "    " +"$"+ VM5000.getBalance().toString());
+					logWriter.append(feedWrite);
+					logWriter.append("\n");
+
+
+					
 				}
-				/* choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS); */
 
 				if (choice.equals(PURCHASE_DISPLAY_SELECT)) {
 					System.out.println("Please enter the location of the item you would like to purchase ");
-					System.out.println("sdfsdf");
+					
+					
+					//printWrtierClass.appendthisitem(purchased Item String);
+					String beforeAfterBalance = ("    $"+VM5000.getBalance().toString());
 
-					//VM5000.purchaseThis(menu.getProductSelected());
-					System.out.println(menu.getProductSelected());
-					System.out.println(VM5000.inventoryMap.get(menu.getProductSelected()).pop());
+					System.out.println(VM5000.purchaseThis(menu.getProductSelected()));
+					beforeAfterBalance += ("     $"+VM5000.getBalance().toString());
+					logWriter.append(VM5000.poppedItemGlobal);
+					logWriter.append(beforeAfterBalance);
 
-					/* choice = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS); */
+					logWriter.append("\n");
+					
 				}
 				if (choice.equals(PURCHASE_DISPLAY_FINAL)) {
-					System.out.println("sdfsdf");
-					System.out.println(menu);
-					System.out.println("sdfsdf");
+					String logChange = ( timestamp.toGMTString() + " GIVE CHANGE:  " +"$"+ VM5000.getBalance().toString());
+					System.out.println(VM5000.makeChange());
+					logChange += ("    " +"$"+ VM5000.getBalance().toString());
+					logWriter.append(logChange);
+					logWriter.close();
+
+					for (String sound : VM5000.soundList) {
+						System.out.println(sound);
+
+					}
+					
 
 				}
 			}
-
-		}
+		} 
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
