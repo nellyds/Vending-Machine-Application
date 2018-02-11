@@ -50,14 +50,18 @@ public class Menu {
 
 			String userInput = in.nextLine();
 			try {
-				return new BigDecimal(userInput).setScale(2);
-			} catch(NumberFormatException ex) {
-				out.println("Please enter a valid number.");
-				out.println();
-				out.flush();
+			if (userInput.contains("1") || userInput.contains("5") || userInput.contains("10") || userInput.contains("20")) {
+			     return new BigDecimal(userInput).setScale(2);
+				} 
 			}
+		catch(IllegalArgumentException ex) {
+			   out.println("Please enter a valid cash amount.");
+			   out.println();
+			   out.flush();
+		}				
 		}
-	}
+}
+	
 
 	private Object getChoiceFromUserInput(Object[] options) {
 		Object choice = null;
